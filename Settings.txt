@@ -1,0 +1,30 @@
+Database: mysql (user: root, pwd: rene1989) => mysql -u root -p
+          oder cf_user, gleiches pwd
+Database table: links_link
+Database access: my.conf in /etc/mysql
+url: 127.0.0.1:8000/graphql
+mapping query/mutation etc zu db-table: namensschema wie links (Ordner) link (klasse) =>links_link
+
+Start Devserver:
+python3 -m venv venv
+source venv/bin/activate
+python manage.py runserver
+bei ModuleNotFoundError: pip install django==2.1.4 graphene-django==2.2.0 django-filter==2.0.0 django-graphql-jwt==0.1.5 (nach source venv/bin/activate)
+
+Bei DB-/Schemaämderungen:
+python manage.py makemigrations
+python manage.py migrate
+
+
+Zurücksetzen Datenbank:
+find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+find . -path "*/migrations/*.pyc"  -delete   
+drop database YOUR_DATABASE_NAME;
+create database YOUR_DATABASE_NAME;
+python manage.py makemigrations
+python manage.py migrate
+In models.py set managed = TRUE
+
+
+
+
